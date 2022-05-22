@@ -13,7 +13,7 @@ import salatosik.util.DatabasePlayersSystem;
 import salatosik.util.DatabaseTimerTask;
 import salatosik.commands.client.ClientAdminCommands;
 import salatosik.commands.server.ServerAdminCommands;
-import salatosik.filters.chatfilers.MutedPlayerFilter;
+import salatosik.filters.chat.MutedPlayerFilter;
 import salatosik.handlers.PlayerAction;
 
 public class AdminCommands extends Plugin {
@@ -28,7 +28,7 @@ public class AdminCommands extends Plugin {
     // called when game initializes
     @Override
     public void init() {
-        
+
         // init database and searching problems, if database not loaded - generate exception
         File dir = new File("config/mods/admin-commands-databases");
         if(!dir.exists()) {
