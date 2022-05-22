@@ -21,7 +21,7 @@
 - ``admplayerstats <playername/UUID>`` - дає статистику гравця (час бану та муту)
 
 # команди клієнта
-- до всіх **клієнтськіх** команд мають доступ тільки адмін
+до всіх **клієнтськіх** команд мають доступ тільки адмін
 - ``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - заблуковує гравця по заданому часі
 - ``admtimeunban <playername/UUID>`` - розблуковує гравця
 - ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - заглушує гравця по заданому часі
