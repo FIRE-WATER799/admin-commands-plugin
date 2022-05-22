@@ -13,22 +13,22 @@
 це швидко можна вирішити написавши # # # 21 40 виходить як 2022 5 22 21 40.
 
 # команди консолі
-``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - заблуковує гравця по заданому часі
-``admtimeunban <playername/UUID>`` - розблуковує гравця
-``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - заглушує гравця по заданому часі
-``admunmute <playername/UUID>`` - розглушує гравця
-``admcurrentdate`` - дає повні дати з моменту коли ви написали команду
-``admplayerstats <playername/UUID>`` - дає статистику гравця (час бану та муту)
+- ``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - заблуковує гравця по заданому часі
+- ``admtimeunban <playername/UUID>`` - розблуковує гравця
+- ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - заглушує гравця по заданому часі
+- ``admunmute <playername/UUID>`` - розглушує гравця
+- ``admcurrentdate`` - дає повні дати з моменту коли ви написали команду
+- ``admplayerstats <playername/UUID>`` - дає статистику гравця (час бану та муту)
 
 # команди клієнта
 - до всіх **клієнтськіх** команд мають доступ тільки адмін
-``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - заблуковує гравця по заданому часі
-``admtimeunban <playername/UUID>`` - розблуковує гравця
-``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - заглушує гравця по заданому часі
-``admunmute <playername/UUID>`` - розглушує гравця
-``admcurrentdate`` - дає повні дати з моменту коли ви написали команду
-``admplayeruuid <playername>`` - дає **UUID** гравця (саме той індетифікатор який записується в БД)
-``admplayerstats <playername/UUID>`` - дає статистику гравця в таблиці (час бану та муту)
+- ``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - заблуковує гравця по заданому часі
+- ``admtimeunban <playername/UUID>`` - розблуковує гравця
+- ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - заглушує гравця по заданому часі
+- ``admunmute <playername/UUID>`` - розглушує гравця
+- ``admcurrentdate`` - дає повні дати з моменту коли ви написали команду
+- ``admplayeruuid <playername>`` - дає **UUID** гравця (саме той індетифікатор який записується в БД)
+- ``admplayerstats <playername/UUID>`` - дає статистику гравця в таблиці (час бану та муту)
 
 # Компіляція
 Щоб почати користуватися моїм плагіном вам потрібно його скомпілювати
@@ -42,3 +42,4 @@
 - запишіть ``mvn install``
 - в кінці збірки **jar** файлу в командному рядку має написати *build succes* та створитися тека *target*
 - в теці **target** знайдіть **.jar** файл який буде мати приблизну назву *admin-commands-plugin-1.0-jar-with-dependencies.jar* - це і є плагін який відповідно ви можете використати для вашого серверу
+- 
