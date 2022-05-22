@@ -13,7 +13,7 @@ import salatosik.util.DatabasePlayersSystem;
 import salatosik.util.DatabaseTimerTask;
 import salatosik.commands.client.ClientAdminCommands;
 import salatosik.commands.server.ServerAdminCommands;
-import salatosik.filters.chat.MutedPlayerFilter;
+import salatosik.filters.chatfilers.MutedPlayerFilter;
 import salatosik.handlers.PlayerAction;
 
 public class AdminCommands extends Plugin {
