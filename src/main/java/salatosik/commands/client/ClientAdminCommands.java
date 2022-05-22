@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import mindustry.Vars;
-import mindustry.gen.Call;
 import mindustry.gen.Player;
 import mindustry.net.NetConnection;
 import salatosik.util.DatabasePlayersSystem;
@@ -102,7 +101,7 @@ public class ClientAdminCommands {
                         if(muteTime == 0) text += "Час глушки: [yellow]не заглушений";
                         else text += "Час глушки: [yellow]" + formater.format(new Date(muteTime));
 
-                        Call.infoMessage(player.con(), text);
+                        player.sendMessage(text);
                     }
                 }
             }
