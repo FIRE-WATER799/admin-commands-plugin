@@ -10,13 +10,13 @@ import java.util.List;
 import arc.util.Log;
 import mindustry.Vars;
 import mindustry.net.NetConnection;
+
 import salatosik.util.DatabasePlayersSystem;
 
 public class ServerAdminCommands {
 
     private static SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    // method for this class, created for replace symvol if he is
     private static Calendar timeConsructor(String[] arguments) {
         Calendar calendar = new GregorianCalendar();
         List<Integer> dateList = new ArrayList<>();
@@ -86,7 +86,7 @@ public class ServerAdminCommands {
                         } else {
                             DatabasePlayersSystem.replaceWherePlayerId(uuid, "bantime", banTime);
 
-                            net.player.kick("[red]Вас забанили через консоль серверу!\nДо кінця бану: [yellow][time]"
+                            net.player.kick("[red]Вас заблокували через консоль серверу!\nДо кінця бану: [yellow][time]"
                                 .replace("[time]", formater.format(calendar.getTime())), 100);
 
                             Log.info("The [player] was banned.".replace("[player]", playerName));
@@ -106,7 +106,7 @@ public class ServerAdminCommands {
 
                     for(NetConnection net: Vars.net.getConnections()) {
                         if(net.player.con().uuid.equals(args[0])) {
-                            net.player.kick("[red]Вас забанили через консоль серверу до [yellow][time]"
+                            net.player.kick("[red]Вас заблокували через консоль серверу до [yellow][time]"
                             .replace("[time]", formater.format(calendar.getTime())), 100);
                         }
                     }
@@ -224,7 +224,7 @@ public class ServerAdminCommands {
 
                 for(NetConnection net: Vars.net.getConnections()) {
                     if(net.player.name().equals(args[0])) {
-                        net.player.sendMessage("[green]Вас розмутили і ви можете писати в чат!");
+                        net.player.sendMessage("[green]Вас розглушили і ви можете писати в чат!");
                     }
                 }
 
@@ -237,7 +237,7 @@ public class ServerAdminCommands {
                 DatabasePlayersSystem.replaceWherePlayerId(net.player.con().uuid, "mutetime", 0);
 
                 Log.info("Player has unmuted!");
-                net.player.sendMessage("[green]Вас розмутили і ви можете писати в чат!");
+                net.player.sendMessage("[green]Вас розглушили і ви можете писати в чат!");
                 return;
             }
         }
