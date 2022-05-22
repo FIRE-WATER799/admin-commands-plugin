@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import mindustry.Vars;
+import mindustry.gen.Call;
 import mindustry.gen.Player;
 import mindustry.net.NetConnection;
 import salatosik.util.DatabasePlayersSystem;
@@ -86,25 +87,46 @@ public class ClientAdminCommands {
         }
     }
 
+    private static String statsBuilder(String playerName, long banTime, long muteTime) {
+        String text = "[green]Гравець: [yellow]" + playerName + "[]\n";
+
+        if(banTime == 0) text += "Час блокування: [yellow]не заблукований[]\n";
+        else text += "Час блокування: [yellow]" + formater.format(new Date(banTime)) + "[]\n";
+
+        if(muteTime == 0) text += "Час глушки: [yellow]не заглушений";
+        else text += "Час глушки: [yellow]" + formater.format(new Date(muteTime));
+
+        return text;
+    }
+
     public static void playerStats(String[] args, Player player) {
         if(player.admin) {
-            for(NetConnection net: Vars.net.getConnections()) {
-                if(net.player.con().uuid.equals(args[0])) {
-                    if(DatabasePlayersSystem.searchId(net.player.con().uuid)) {
+            if(DatabasePlayersSystem.searchId(args[0])) {
+                for(NetConnection net: Vars.net.getConnections()) {
+                    if(net.player.con().uuid.equals(args[0])) {
                         long banTime = DatabasePlayersSystem.getByPlayerId(args[0], "bantime");
                         long muteTime = DatabasePlayersSystem.getByPlayerId(args[0], "mutetime");
-                        String text = "[green]Гравець: [yellow]" + player.name + "[]\n";
+                        
+                        Call.infoMessage(player.con(), statsBuilder(net.player.name(), banTime, muteTime));
+                        return;
+                    }
+                }
 
-                        if(banTime == 0) text += "Час блокування: [yellow]не заблукований[]\n";
-                        else text += "Час блокування: [yellow]" + formater.format(new Date(banTime)) + "[]\n";
+            } else {
+                for(NetConnection net: Vars.net.getConnections()) {
+                    if(net.player.name().equals(args[0])) {
+                        if(DatabasePlayersSystem.searchId(net.player.con().uuid)) {
+                            long banTime = DatabasePlayersSystem.getByPlayerId(args[0], "bantime");
+                            long muteTime = DatabasePlayersSystem.getByPlayerId(args[0], "mutetime");
 
-                        if(muteTime == 0) text += "Час глушки: [yellow]не заглушений";
-                        else text += "Час глушки: [yellow]" + formater.format(new Date(muteTime));
-
-                        player.sendMessage(text);
+                            Call.infoMessage(player.con(), statsBuilder(net.player.name(), banTime, muteTime));
+                            return;
+                        }
                     }
                 }
             }
+
+            player.sendMessage("[yellow]Гравця не знайдено");
 
         } else {
             player.sendMessage("[red]Команда доступна лише адмінам!");
