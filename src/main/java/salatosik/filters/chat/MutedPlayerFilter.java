@@ -1,4 +1,4 @@
-package salatosik.filters.chatfilers;
+package salatosik.filters.chat;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
