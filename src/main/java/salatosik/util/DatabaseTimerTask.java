@@ -40,7 +40,7 @@ public class DatabaseTimerTask extends TimerTask {
                                 muteFromDatabase.setTime(new Date(muteTime));
 
                                 if(Calendar.getInstance().after(muteFromDatabase)) {
-                                    net.player.sendMessage("[green]Час мута закінчився і ви знову можете писати.");
+                                    net.player.sendMessage("[green]Час приглушення закінчився і ви знову можете писати.");
                                     DatabasePlayersSystem.replaceWherePlayerId(id, "mutetime", 0);
                                 }
                             }
