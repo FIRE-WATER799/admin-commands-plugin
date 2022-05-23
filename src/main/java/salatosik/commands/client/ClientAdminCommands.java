@@ -190,32 +190,32 @@ public class ClientAdminCommands {
         if(!player.admin) {
             player.sendMessage("[red]Команда доступна лише адмінам!");
 
+        } else if(DatabasePlayersSystem.searchId(args[0])) {
+            if(DatabasePlayersSystem.getByPlayerId(args[0], "bantime") == 0) {
+                player.sendMessage("[yellow]Гравець на даний момент не забанений");
+                return;
+            }
+
+            DatabasePlayersSystem.replaceWherePlayerId(args[0], "bantime", 0);
+            player.sendMessage("[green]Гравець успішно розбанений!");
+            return;
+
         } else {
-            if(DatabasePlayersSystem.searchId(args[0])) {
-                if(DatabasePlayersSystem.getByPlayerId(args[0], "bantime") == 0) {
-                    player.sendMessage("[yellow]Гравець на даний момент не забанений");
+            for(NetConnection net: Vars.net.getConnections()) {
+                if(net.player.name().equals(args[0])) {
+                    String uuid = net.player.con().uuid;
 
-                } else {
-                    DatabasePlayersSystem.replaceWherePlayerId(args[0], "bantime", 0);
-                    player.sendMessage("[green]Гравець успішно розбанений!");
-                }
-
-            } else {
-                for(NetConnection net: Vars.net.getConnections()) {
-                    if(net.player.name().equals(args[0])) {
-                        String uuid = net.player.con().uuid;
-
-                        if(DatabasePlayersSystem.searchId(uuid)) {
-                            DatabasePlayersSystem.replaceWherePlayerId(args[0], "bantime", 0);
-                            player.sendMessage("[green]Гравець успішно розбанений!");
-
-                        } else {
-                            player.sendMessage("[yellow]Гравця не знайдено!");
-                        }
+                    if(DatabasePlayersSystem.searchId(uuid)) {
+                        DatabasePlayersSystem.replaceWherePlayerId(args[0], "bantime", 0);
+                        player.sendMessage("[green]Гравець успішно розбанений!");
                     }
+
+                    return;
                 }
             }
         }
+
+        player.sendMessage("[yellow]Гравець не знайдений!");
     }
 
     public static void mutePlayer(String[] args, Player player) {
@@ -225,61 +225,99 @@ public class ClientAdminCommands {
             player.sendMessage("[red]Команда доступна лише адмінам!");
             return;
 
-        } else if(calendar != null) {
-            if(DatabasePlayersSystem.searchId(args[0])) {
+        } else if(DatabasePlayersSystem.searchId(args[0])) {
+            if(DatabasePlayersSystem.getByPlayerId(args[0], "mutetime") > 0) {
+                player.sendMessage("[green]Гравець вже заглушений.");
+                return;
+            }
 
-                if(DatabasePlayersSystem.getByPlayerId(args[0], "mutetime") > 0) {
-                    player.sendMessage("[yellow]Гравець вже замючений!");
-                    return;
+            DatabasePlayersSystem.replaceWherePlayerId(args[0], "mutetime", calendar.getTime().getTime());
+            player.sendMessage("[green]Гравець успішно заглушений!");
 
-                } else {
-                    DatabasePlayersSystem.replaceWherePlayerId(args[0], "mutetime", calendar.getTime().getTime());
-                    
-                    for(NetConnection net: Vars.net.getConnections()) {
-                        if(net.player.con().uuid.equals(args[0])) {
-                            net.kick("[red]Вас замютив адмін [yellow]" + player.name() +
-                                "[green]До кінця муту: [yellow]" + formater.format(calendar.getTime()));
+            for(NetConnection net: Vars.net.getConnections()) {
+                if(net.player.con().uuid.equals(args[0])) {
+                    Call.infoMessage(net.player.con(), "[red]Тебе заглушив адмін [yellow]" + player.name() +
+                            "\nДо кінця наказу: " + formater.format(calendar.getTime()));
 
-                            break;
-                        }
-                    }
-
-                    player.sendMessage("[green]Гравець замючений!");
                     return;
                 }
             }
+
+        } else {
+            for(NetConnection net: Vars.net.getConnections()) {
+                if(net.player.name().equals(args[0])) {
+                    String uuid = net.player.con().uuid;
+
+                    if(DatabasePlayersSystem.searchId(uuid)) {
+                        if(DatabasePlayersSystem.getByPlayerId(uuid, "mutetime") > 0) {
+                            player.sendMessage("[green]Гравець вже заглушений.");
+                            return;
+                        }
+
+                        DatabasePlayersSystem.replaceWherePlayerId(uuid, "mutetime", calendar.getTime().getTime());
+                        player.sendMessage("[green]Гравець успішно заглушений!");
+
+                        Call.infoMessage(net.player.con(), "[red]Тебе заглушив адмін [yellow]" + player.name() +
+                            "\nДо кінця наказу: " + formater.format(calendar.getTime()));
+                        
+                        return;
+                    }
+                }
+            }
         }
+
+        player.sendMessage("[yellow]Гравець не знайдений.");
     }
 
     public static void unmutePlayer(String[] args, Player player) {
         if(!player.admin) {
             player.sendMessage("[red]Команда доступна лише адмінам!");
 
-        } else {
-            if(DatabasePlayersSystem.searchId(args[0])) {
-                if(DatabasePlayersSystem.getByPlayerId(args[0], "mutetime") == 0) {
-                    player.sendMessage("[yellow]Гравець на даний момент не замючений");
+        } else if(DatabasePlayersSystem.searchId(args[0])) {
 
-                } else {
-                    DatabasePlayersSystem.replaceWherePlayerId(args[0], "mutetime", 0);
-                    player.sendMessage("[green]Гравець успішно розмючений!");
-                }
+            if(DatabasePlayersSystem.getByPlayerId(args[0], "mutetime") == 0) {
+                player.sendMessage("[yellow]Гравець не має статусу заглушеного!");
+                return;
 
             } else {
+                DatabasePlayersSystem.replaceWherePlayerId(args[0], "mutetime", 0);
+                player.sendMessage("[green]Гравець успішно розглушений!");
+
                 for(NetConnection net: Vars.net.getConnections()) {
-                    if(net.player.name().equals(args[0])) {
-                        String uuid = net.player.con().uuid;
+                    if(net.player.con().uuid.equals(args[0])) {
+                        Call.infoMessage(net.player.con(), "[green]Вас розглушив адмін [yellow]" +
+                            player.name() + "\n[green]Тепер ви знову можете писати в чат!");
 
-                        if(DatabasePlayersSystem.searchId(uuid)) {
-                            DatabasePlayersSystem.replaceWherePlayerId(args[0], "mutetime", 0);
-                            player.sendMessage("[green]Гравець успішно розмючений!");
+                        break;
+                    }
+                }
 
-                        } else {
-                            player.sendMessage("[yellow]Гравця не знайдено!");
+                return;
+            }
+
+        } else {
+            for(NetConnection net: Vars.net.getConnections()) {
+                if(net.player.name().equals(args[0])) {
+                    String uuid = net.player.con().uuid;
+
+                    if(DatabasePlayersSystem.searchId(uuid)) {
+                        if(DatabasePlayersSystem.getByPlayerId(uuid, "mutetime") == 0) {
+                            player.sendMessage("[yellow]Гравець не має статусу заглушеного!");
+                            return;
                         }
+
+                        DatabasePlayersSystem.replaceWherePlayerId(uuid, "mutetime", 0);
+                        player.sendMessage("[green]Гравець успішно роглушений!");
+
+                        Call.infoMessage(net.player.con(), "[green]Вас розглушив адмін [yellow]" +
+                            player.name() + "\n[green]Тепер ви знову можете писати в чат!");
+                        
+                        return;
                     }
                 }
             }
         }
+
+        player.sendMessage("[yellow]Гравець не знайдений.");
     }
 }
