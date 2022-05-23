@@ -178,7 +178,7 @@ public class ServerAdminCommands {
                             Log.info("Player has muted!");
 
                             net.player.sendMessage("[red]Вас заглушили через консоль!\n" +
-                                "[green]До кінця: [yellow]" + formater.format(calendar.getTime()));
+                                "[green]До кінця приглушення: [yellow]" + formater.format(calendar.getTime()));
 
                             return;
                         }
@@ -197,7 +197,7 @@ public class ServerAdminCommands {
                     for(NetConnection net: Vars.net.getConnections()) {
                         if(net.player.con().uuid.equals(args[0])) {
                             net.player.sendMessage("[red]Вас заглушили через консоль!\n" +
-                                "[green]До кінця: [yellow]" + formater.format(calendar.getTime()));
+                                "[green]До кінця приглушення: [yellow]" + formater.format(calendar.getTime()));
                         }
                     }
 
