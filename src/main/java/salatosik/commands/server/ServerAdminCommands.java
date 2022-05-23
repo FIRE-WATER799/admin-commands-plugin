@@ -86,7 +86,7 @@ public class ServerAdminCommands {
                         } else {
                             DatabasePlayersSystem.replaceWherePlayerId(uuid, "bantime", banTime);
 
-                            net.player.kick("[red]Вас заблокували через консоль серверу!\nДо кінця бану: [yellow][time]"
+                            net.player.kick("[red]You have been blocked via the server console!\nUntil the end of the ban: [yellow][time]"
                                 .replace("[time]", formater.format(calendar.getTime())), 100);
 
                             Log.info("The [player] was banned.".replace("[player]", playerName));
@@ -106,7 +106,7 @@ public class ServerAdminCommands {
 
                     for(NetConnection net: Vars.net.getConnections()) {
                         if(net.player.con().uuid.equals(args[0])) {
-                            net.player.kick("[red]Вас заблокували через консоль серверу до [yellow][time]"
+                            net.player.kick("[red]You have been blocked via the server console!\nUntil the end of the ban: [yellow][time]"
                             .replace("[time]", formater.format(calendar.getTime())), 100);
                         }
                     }
@@ -177,8 +177,8 @@ public class ServerAdminCommands {
                             DatabasePlayersSystem.replaceWherePlayerId(uuid, "mutetime", mutetime);
                             Log.info("Player has muted!");
 
-                            net.player.sendMessage("[red]Вас заглушили через консоль!\n" +
-                                "[green]До кінця: [yellow]" + formater.format(calendar.getTime()));
+                            net.player.sendMessage("[red]You were muted through the console!\n" +
+                                "[green]Until the end of the drowning: [yellow]" + formater.format(calendar.getTime()));
 
                             return;
                         }
@@ -196,8 +196,8 @@ public class ServerAdminCommands {
 
                     for(NetConnection net: Vars.net.getConnections()) {
                         if(net.player.con().uuid.equals(args[0])) {
-                            net.player.sendMessage("[red]Вас заглушили через консоль!\n" +
-                                "[green]До кінця: [yellow]" + formater.format(calendar.getTime()));
+                            net.player.sendMessage("[red]You were muted through the console!\n" +
+                                "[green]Until the end of the drowning: [yellow]" + formater.format(calendar.getTime()));
                         }
                     }
 
@@ -224,7 +224,7 @@ public class ServerAdminCommands {
 
                 for(NetConnection net: Vars.net.getConnections()) {
                     if(net.player.name().equals(args[0])) {
-                        net.player.sendMessage("[green]Вас розглушили і ви можете писати в чат!");
+                        net.player.sendMessage("[green]You have been unmuted and you can chat!");
                     }
                 }
 
@@ -237,7 +237,7 @@ public class ServerAdminCommands {
                 DatabasePlayersSystem.replaceWherePlayerId(net.player.con().uuid, "mutetime", 0);
 
                 Log.info("Player has unmuted!");
-                net.player.sendMessage("[green]Вас розглушили і ви можете писати в чат!");
+                net.player.sendMessage("[green]You have been unmuted and you can chat!");
                 return;
             }
         }
