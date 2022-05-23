@@ -1,4 +1,4 @@
-# For English people or simply peoples whitch bot understand Ukrainian language
+# For English-speaking and other people from another country who do not understand Ukrainian
 The full description of the entire plugin in English is in a separate branch
 - Link: https://github.com/Vitalij3/admin-commands-plugin/tree/English
 
