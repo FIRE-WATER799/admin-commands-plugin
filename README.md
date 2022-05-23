@@ -1,3 +1,7 @@
+# For English people or simply peoples whitch bot understand Ukrainian language
+#### The full description of the entire plugin in English is in a separate branch
+#### Link: https://github.com/Vitalij3/admin-commands-plugin/tree/English
+
 # Інформація
 Якось давно (ні) у мене не було ідей для створення нового плагіну, і я запитав у Сергія (CergC)
 щоб він підсказав якусь ідею він мені відповів щоб я створив плагін на блокування та глушіння!
