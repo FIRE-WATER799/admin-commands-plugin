@@ -2,11 +2,11 @@
 Some time ago (no) I had no idea to create a new plugin, and I asked CergC
 so that he could suggest an idea, he answered me so that I could create a plug-in for blocking and jamming!
 And you know what? I didn't know the database but I got together and wrote it all (who am I contacting ..)
-## Особливості
+## Specifics
 - The plugin works on a database **sqlite3**
 - Even when the plugin is turned off conditionally time will go
 
-## Команди
+## Commands
 - Traditionally, to avoid conflicts between team names, I added the opening word ``adm``
 - You can also enter dates in the commands where you need to enter ``#`` so the plugin will take the present
 the value of an element. For example there is a time ``2022 5 22 21 40`` of course that it quickly gets bored back this can be solved quickly by writing ``# # # 21 40`` comes out as ``2022 5 22 21 40``.
