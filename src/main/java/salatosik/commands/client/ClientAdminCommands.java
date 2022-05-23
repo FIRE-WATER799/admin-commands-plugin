@@ -46,7 +46,7 @@ public class ClientAdminCommands {
             }
 
         } catch(NumberFormatException exception) {
-            player.sendMessage("[yellow]Недійсний аргумент! Будь ласка, напишіть цифри або символ '#', щоб вставити поточну дату");
+            player.sendMessage("[yellow]Недійсний аргумент! Будь-ласка, напишіть цифри або символ '#', щоб вставити поточну дату");
             return null;
 
         } catch(Exception exception) {

@@ -18,8 +18,8 @@ public class MutedPlayerFilter {
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(new Date(DatabasePlayersSystem.getByPlayerId(player.con().uuid, "mutetime")));
 
-            player.sendMessage("[red]Ви заглушені!\n[green]До кінця наказу: [yellow]" +
-                formater.format(calendar.getTime()) + " []хвилин!");
+            player.sendMessage("[red]Ви заглушені!\n[green]До кінця приглушення: [yellow]" +
+                formater.format(calendar.getTime()));
 
             return text.replace(text, "[yellow]щось бурмутить... [red](заглушений)");
 
