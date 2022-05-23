@@ -19,7 +19,7 @@ public class PlayerAction {
             SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             if(banTime != 0) {
-                event.player.con().kick("[red]Ви були заблоковані на сервері!\n[green]Дата розбану: [yellow]" +
+                event.player.con().kick("[red]Ви були заблуковані на сервері!\n[green]Час зняття наказу: [yellow]" +
                     formater.format(new Date(banTime)), 100);
             }
         }

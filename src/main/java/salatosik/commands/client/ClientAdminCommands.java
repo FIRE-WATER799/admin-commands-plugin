@@ -94,7 +94,7 @@ public class ClientAdminCommands {
         else text += "Час блокування: [yellow]" + formater.format(new Date(banTime)) + "[]\n";
 
         if(muteTime == 0) text += "Час глушки: [yellow]не заглушений";
-        else text += "Час глушки: [yellow]" + formater.format(new Date(muteTime));
+        else text += "Час блокування чату: [yellow]" + formater.format(new Date(muteTime));
 
         return text;
     }
@@ -144,7 +144,7 @@ public class ClientAdminCommands {
             if(DatabasePlayersSystem.searchId(args[0])) {
 
                 if(DatabasePlayersSystem.getByPlayerId(args[0], "bantime") > 0) {
-                    player.sendMessage("[yellow]Гравець вже забанений");
+                    player.sendMessage("[yellow]Гравець вже заблокований");
                     return;
 
                 } else {
@@ -152,7 +152,7 @@ public class ClientAdminCommands {
                     
                     for(NetConnection net: Vars.net.getConnections()) {
                         if(net.player.con().uuid.equals(args[0])) {
-                            net.kick("[red]Вас заблокував адмін" + player.name + "\nДо кінця бану: [yellow]" + 
+                            net.kick("[red]Вас заблокував адмін" + player.name + "\nДо кінця блокування: [yellow]" + 
                                 formater.format(calendar.getTime()), 100);
 
                             break;
@@ -172,10 +172,10 @@ public class ClientAdminCommands {
                             DatabasePlayersSystem.replaceWherePlayerId(uuid, "bantime", 
                                 calendar.getTime().getTime());
                             
-                            net.kick("[red]Вас забанив адмін [yellow]" + player.name +"\n[green]До кінця бану: [yellow]" + 
+                            net.kick("[red]Вас забанив адмін [yellow]" + player.name +"\n[green]До кінця блокування: [yellow]" + 
                                 formater.format(calendar.getTime()), 100);
 
-                            player.sendMessage("[green]Гравець забанений!");
+                            player.sendMessage("[green]Гравець заблокований!");
                             return;
                         }
                     }
@@ -192,12 +192,12 @@ public class ClientAdminCommands {
 
         } else if(DatabasePlayersSystem.searchId(args[0])) {
             if(DatabasePlayersSystem.getByPlayerId(args[0], "bantime") == 0) {
-                player.sendMessage("[yellow]Гравець на даний момент не забанений");
+                player.sendMessage("[yellow]Гравець на даний момент не заблукований");
                 return;
             }
 
             DatabasePlayersSystem.replaceWherePlayerId(args[0], "bantime", 0);
-            player.sendMessage("[green]Гравець успішно розбанений!");
+            player.sendMessage("[green]Гравець успішно розблокований!");
             return;
 
         } else {
@@ -207,7 +207,7 @@ public class ClientAdminCommands {
 
                     if(DatabasePlayersSystem.searchId(uuid)) {
                         DatabasePlayersSystem.replaceWherePlayerId(args[0], "bantime", 0);
-                        player.sendMessage("[green]Гравець успішно розбанений!");
+                        player.sendMessage("[green]Гравець успішно розблокований!");
                     }
 
                     return;
@@ -307,7 +307,7 @@ public class ClientAdminCommands {
                         }
 
                         DatabasePlayersSystem.replaceWherePlayerId(uuid, "mutetime", 0);
-                        player.sendMessage("[green]Гравець успішно роглушений!");
+                        player.sendMessage("[green]Гравець успішно розглушений!");
 
                         Call.infoMessage(net.player.con(), "[green]Вас розглушив адмін [yellow]" +
                             player.name() + "\n[green]Тепер ви знову можете писати в чат!");
