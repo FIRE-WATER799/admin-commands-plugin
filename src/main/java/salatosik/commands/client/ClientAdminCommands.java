@@ -46,11 +46,11 @@ public class ClientAdminCommands {
             }
 
         } catch(NumberFormatException exception) {
-            player.sendMessage("[yellow]Недійсний аргумент! Будь-ласка, напишіть цифри або символ '#', щоб вставити поточну дату");
+            player.sendMessage("[yellow]Invalid argument! Please write numbers or a '#' to insert the current date");
             return null;
 
         } catch(Exception exception) {
-            player.sendMessage("[yellow]Недійсний аргумент! Можливо, ви ввели занадто велику цифру");
+            player.sendMessage("[yellow]Invalid argument! You may have entered too large a number");
             return null;
         }
 
@@ -61,12 +61,12 @@ public class ClientAdminCommands {
     }
 
     public static void currentDate(String[] args, Player player) {
-        player.sendMessage("[green]Час: [yellow]" + formater.format(Calendar.getInstance().getTime()));
+        player.sendMessage("[green]Time: [yellow]" + formater.format(Calendar.getInstance().getTime()));
     }
 
     public static void playerId(String[] args, Player player) {
         if(!player.admin) {
-            player.sendMessage("[red]Команда доступна лише адмінам!");
+            player.sendMessage("[red]the command is available only to admins!");
             return;
         }
         
@@ -74,12 +74,12 @@ public class ClientAdminCommands {
             if(net.player.name().equals(args[0])) {
                 if(DatabasePlayersSystem.searchId(net.player.con().uuid)) {
 
-                    player.sendMessage("[red]UUID [green]гравця [yellow][player]: [red][uuid]"
+                    player.sendMessage("[red]UUID [green]player [yellow][player]: [red][uuid]"
                         .replace("[player]", net.player.name())
                         .replace("[uuid]", net.player.con().uuid));
 
                 } else {
-                    player.sendMessage("[yellow]Гравця не знайдено.");
+                    player.sendMessage("[yellow]player not found.");
                 }
 
                 break;
@@ -88,13 +88,13 @@ public class ClientAdminCommands {
     }
 
     private static String statsBuilder(String playerName, long banTime, long muteTime) {
-        String text = "[green]Гравець: [yellow]" + playerName + "[]\n";
+        String text = "[green]Player: [yellow]" + playerName + "[]\n";
 
-        if(banTime == 0) text += "Час блокування: [yellow]не заблукований[]\n";
-        else text += "Час блокування: [yellow]" + formater.format(new Date(banTime)) + "[]\n";
+        if(banTime == 0) text += "Block time: [yellow]no blocked[]\n";
+        else text += "Block time: [yellow]" + formater.format(new Date(banTime)) + "[]\n";
 
-        if(muteTime == 0) text += "Час глушки: [yellow]не заглушений";
-        else text += "Час блокування чату: [yellow]" + formater.format(new Date(muteTime));
+        if(muteTime == 0) text += "Mute time: [yellow]no muted";
+        else text += "Chat block time: [yellow]" + formater.format(new Date(muteTime));
 
         return text;
     }
@@ -126,10 +126,10 @@ public class ClientAdminCommands {
                 }
             }
 
-            player.sendMessage("[yellow]Гравця не знайдено");
+            player.sendMessage("[yellow]Player not found!");
 
         } else {
-            player.sendMessage("[red]Команда доступна лише адмінам!");
+            player.sendMessage("[red]the command is only available to admins!");
         }
     }
 
@@ -137,14 +137,14 @@ public class ClientAdminCommands {
         Calendar calendar = timeConsructor(args, player);
 
         if(!player.admin) {
-            player.sendMessage("[red]Команда доступна лише адмінам!");
+            player.sendMessage("[red]the command is only available to admins!");
             return;
 
         } else if(calendar != null) {
             if(DatabasePlayersSystem.searchId(args[0])) {
 
                 if(DatabasePlayersSystem.getByPlayerId(args[0], "bantime") > 0) {
-                    player.sendMessage("[yellow]Гравець вже заблокований");
+                    player.sendMessage("[yellow]Player has blocked");
                     return;
 
                 } else {
@@ -152,14 +152,14 @@ public class ClientAdminCommands {
                     
                     for(NetConnection net: Vars.net.getConnections()) {
                         if(net.player.con().uuid.equals(args[0])) {
-                            net.kick("[red]Вас заблокував адмін" + player.name + "\nДо кінця блокування: [yellow]" + 
+                            net.kick("[red]You blocked by admin" + player.name + "\nTo end block: [yellow]" + 
                                 formater.format(calendar.getTime()), 100);
 
                             break;
                         }
                     }
 
-                    player.sendMessage("[green]Гравець заблокований!");
+                    player.sendMessage("[green]player has blocked!");
                     return;
                 }
 
@@ -172,32 +172,32 @@ public class ClientAdminCommands {
                             DatabasePlayersSystem.replaceWherePlayerId(uuid, "bantime", 
                                 calendar.getTime().getTime());
                             
-                            net.kick("[red]Вас забанив адмін [yellow]" + player.name +"\n[green]До кінця блокування: [yellow]" + 
+                            net.kick("[red]You baned by admin [yellow]" + player.name +"\n[green]To end block: [yellow]" + 
                                 formater.format(calendar.getTime()), 100);
 
-                            player.sendMessage("[green]Гравець заблокований!");
+                            player.sendMessage("[green]Player has blocked!");
                             return;
                         }
                     }
                 }
             }
 
-            player.sendMessage("[yellow]Гравця не знайдено");
+            player.sendMessage("[yellow]the player not found");
         }
     }
 
     public static void unbanPlayer(String[] args, Player player) {
         if(!player.admin) {
-            player.sendMessage("[red]Команда доступна лише адмінам!");
+            player.sendMessage("[red]The command is available only to admins!");
 
         } else if(DatabasePlayersSystem.searchId(args[0])) {
             if(DatabasePlayersSystem.getByPlayerId(args[0], "bantime") == 0) {
-                player.sendMessage("[yellow]Гравець на даний момент не заблукований");
+                player.sendMessage("[yellow]The player is not currently blocked");
                 return;
             }
 
             DatabasePlayersSystem.replaceWherePlayerId(args[0], "bantime", 0);
-            player.sendMessage("[green]Гравець успішно розблокований!");
+            player.sendMessage("[green]Player successfully unblocked!");
             return;
 
         } else {
@@ -207,7 +207,7 @@ public class ClientAdminCommands {
 
                     if(DatabasePlayersSystem.searchId(uuid)) {
                         DatabasePlayersSystem.replaceWherePlayerId(args[0], "bantime", 0);
-                        player.sendMessage("[green]Гравець успішно розблокований!");
+                        player.sendMessage("[green]Player successfully unblocked!");
                     }
 
                     return;
@@ -215,29 +215,29 @@ public class ClientAdminCommands {
             }
         }
 
-        player.sendMessage("[yellow]Гравець не знайдений!");
+        player.sendMessage("[yellow]Player not found");
     }
 
     public static void mutePlayer(String[] args, Player player) {
         Calendar calendar = timeConsructor(args, player);
 
         if(!player.admin) {
-            player.sendMessage("[red]Команда доступна лише адмінам!");
+            player.sendMessage("[red]Player successfully unblocked!");
             return;
 
         } else if(DatabasePlayersSystem.searchId(args[0])) {
             if(DatabasePlayersSystem.getByPlayerId(args[0], "mutetime") > 0) {
-                player.sendMessage("[green]Гравець вже заглушений.");
+                player.sendMessage("[green]The player is already muted.");
                 return;
             }
 
             DatabasePlayersSystem.replaceWherePlayerId(args[0], "mutetime", calendar.getTime().getTime());
-            player.sendMessage("[green]Гравець успішно заглушений!");
+            player.sendMessage("[green]The player was successfully muted!");
 
             for(NetConnection net: Vars.net.getConnections()) {
                 if(net.player.con().uuid.equals(args[0])) {
-                    Call.infoMessage(net.player.con(), "[red]Тебе заглушив адмін [yellow]" + player.name() +
-                            "\nДо кінця наказу: " + formater.format(calendar.getTime()));
+                    Call.infoMessage(net.player.con(), "[red]You were muffled by the administrator[yellow]" + player.name() +
+                            "\nUntil the end of the order: " + formater.format(calendar.getTime()));
 
                     return;
                 }
@@ -250,15 +250,15 @@ public class ClientAdminCommands {
 
                     if(DatabasePlayersSystem.searchId(uuid)) {
                         if(DatabasePlayersSystem.getByPlayerId(uuid, "mutetime") > 0) {
-                            player.sendMessage("[green]Гравець вже заглушений.");
+                            player.sendMessage("[green]The player is already muted.");
                             return;
                         }
 
                         DatabasePlayersSystem.replaceWherePlayerId(uuid, "mutetime", calendar.getTime().getTime());
-                        player.sendMessage("[green]Гравець успішно заглушений!");
+                        player.sendMessage("[green]The player was successfully muted!");
 
-                        Call.infoMessage(net.player.con(), "[red]Тебе заглушив адмін [yellow]" + player.name() +
-                            "\nДо кінця наказу: " + formater.format(calendar.getTime()));
+                        Call.infoMessage(net.player.con(), "[red]You were muffled by the administrator [yellow]" + player.name() +
+                            "\nUntil the end of the order: " + formater.format(calendar.getTime()));
                         
                         return;
                     }
@@ -266,27 +266,27 @@ public class ClientAdminCommands {
             }
         }
 
-        player.sendMessage("[yellow]Гравець не знайдений.");
+        player.sendMessage("[yellow]Player not found.");
     }
 
     public static void unmutePlayer(String[] args, Player player) {
         if(!player.admin) {
-            player.sendMessage("[red]Команда доступна лише адмінам!");
+            player.sendMessage("[red]The team is available only to admins!");
 
         } else if(DatabasePlayersSystem.searchId(args[0])) {
 
             if(DatabasePlayersSystem.getByPlayerId(args[0], "mutetime") == 0) {
-                player.sendMessage("[yellow]Гравець не має статусу заглушеного!");
+                player.sendMessage("[yellow]The player does not have the status of muted!");
                 return;
 
             } else {
                 DatabasePlayersSystem.replaceWherePlayerId(args[0], "mutetime", 0);
-                player.sendMessage("[green]Гравець успішно розглушений!");
+                player.sendMessage("[green]The player was successfully silenced!");
 
                 for(NetConnection net: Vars.net.getConnections()) {
                     if(net.player.con().uuid.equals(args[0])) {
-                        Call.infoMessage(net.player.con(), "[green]Вас розглушив адмін [yellow]" +
-                            player.name() + "\n[green]Тепер ви знову можете писати в чат!");
+                        Call.infoMessage(net.player.con(), "[green]You were unmuted by the administrator [yellow]" +
+                            player.name() + "\n[green]Now you can chat again!");
 
                         break;
                     }
@@ -302,15 +302,15 @@ public class ClientAdminCommands {
 
                     if(DatabasePlayersSystem.searchId(uuid)) {
                         if(DatabasePlayersSystem.getByPlayerId(uuid, "mutetime") == 0) {
-                            player.sendMessage("[yellow]Гравець не має статусу заглушеного!");
+                            player.sendMessage("[yellow]The player does not have the status of muted!");
                             return;
                         }
 
                         DatabasePlayersSystem.replaceWherePlayerId(uuid, "mutetime", 0);
-                        player.sendMessage("[green]Гравець успішно розглушений!");
+                        player.sendMessage("[green]The player was successfully muted!");
 
-                        Call.infoMessage(net.player.con(), "[green]Вас розглушив адмін [yellow]" +
-                            player.name() + "\n[green]Тепер ви знову можете писати в чат!");
+                        Call.infoMessage(net.player.con(), "[green]You were unmuted by the administrator [yellow]" +
+                            player.name() + "\n[green]Now you can chat again!");
                         
                         return;
                     }
@@ -318,6 +318,6 @@ public class ClientAdminCommands {
             }
         }
 
-        player.sendMessage("[yellow]Гравець не знайдений.");
+        player.sendMessage("[yellow]Player not found.");
     }
 }

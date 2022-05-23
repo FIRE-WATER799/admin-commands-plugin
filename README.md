@@ -1,44 +1,52 @@
-# Інформація
-Якось давно (ні) у мене не було ідей для створення нового плагіну, і я запитав у Сергія (CergC)
-щоб він підсказав якусь ідею він мені відповів щоб я створив плагін на блокування та глушіння!
-І знаєте що? Я не знав БД але я зібрався і написав це все (до кого я звертаюсь..)
+# Information
+Some time ago (no) I had no idea to create a new plugin, and I asked CergC
+so that he could suggest an idea, he answered me so that I could create a plug-in for blocking and jamming!
+And you know what? I didn't know the database but I got together and wrote it all (who am I contacting ..)
 ## Особливості
-- Плагін працює на базі даних **sqlite3**
-- Навіть коли плагін вимкнений умовно час буде іти
+- The plugin works on a database **sqlite3**
+- Even when the plugin is turned off conditionally time will go
 
 ## Команди
-- По традиції щоб не було конфліктів між назвами команд я додав початкове слово ``adm``
-- Також в командах де потрібно увести дати можна увести ``#`` таким чином плагін візьме теперешнє
-значення якогось елементу. Наприклад є час 2022 5 22 21 40 звичайно що це швидко набридає тому
-це швидко можна вирішити написавши # # # 21 40 виходить як 2022 5 22 21 40.
+- Traditionally, to avoid conflicts between team names, I added the opening word ``adm``
+- You can also enter dates in the commands where you need to enter ``#`` so the plugin will take the present
+the value of an element. For example there is a time ``2022 5 22 21 40`` of course that it quickly gets bored back this can be solved quickly by writing ``# # # 21 40`` comes out as ``2022 5 22 21 40``.
 
-# команди консолі
-- ``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - заблуковує гравця по заданому часі
-- ``admtimeunban <playername/UUID>`` - розблуковує гравця
-- ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - заглушує гравця по заданому часі
-- ``admunmute <playername/UUID>`` - розглушує гравця
-- ``admcurrentdate`` - дає повні дати з моменту коли ви написали команду
-- ``admplayerstats <playername/UUID>`` - дає статистику гравця (час бану та муту)
+# console commands
+- ``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - blocked the player at the 
+specified time
 
-# команди клієнта
-до всіх **клієнтськіх** команд мають доступ тільки адмін
-- ``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - заблуковує гравця по заданому часі
-- ``admtimeunban <playername/UUID>`` - розблуковує гравця
-- ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - заглушує гравця по заданому часі
-- ``admunmute <playername/UUID>`` - розглушує гравця
-- ``admcurrentdate`` - дає повні дати з моменту коли ви написали команду
-- ``admplayeruuid <playername>`` - дає **UUID** гравця (саме той індетифікатор який записується в БД)
-- ``admplayerstats <playername/UUID>`` - дає статистику гравця в таблиці (час бану та муту)
+- ``admtimeunban <playername/UUID>`` - unlocks the player
+- ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - drowns the player at a given time
+- ``admunmute <playername/UUID>`` - deafens the player
+- ``admcurrentdate`` - gives full dates from the time you wrote the command
+- ``admplayerstats <playername/UUID>`` - gives player statistics (blocking and muting time)
 
-# Компіляція
-Щоб почати користуватися моїм плагіном вам потрібно його скомпілювати
+# client commands
+to all **clients** commands have access only to the admin
+- ``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - blocks the player 
+at the specified time
 
-## вимоги
-- встановлений **Maven** на вашому комп'ютері
-- завантажений **zip** архів вихідного коду
+- ``admtimeunban <playername/UUID>`` - unlocks the player
+- ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - drowns the player at a given time
+- ``admunmute <playername/UUID>`` - deafens the player
+- ``admcurrentdate`` - gives full dates from the time you wrote the command
+- ``admplayeruuid <playername>`` - gives **UUID** player 
+(exactly the identifier that is recorded in the database)
 
-## процес компіляції
-- відкрийте командний рядок в розархівованій теці **zip** архіву (якщо не розархівувавли розархівуйте)
-- запишіть ``mvn install``
-- в кінці збірки **jar** файлу в командному рядку має написати *build succes* та створитися тека *target*
-- в теці **target** знайдіть **.jar** файл який буде мати приблизну назву *admin-commands-plugin-1.0-jar-with-dependencies.jar* - це і є плагін який відповідно ви можете використати для вашого серверу
+- ``admplayerstats <playername/UUID>`` - gives player statistics in the table (block and mut time)
+
+# Compilation
+You need to compile it to start using my plugin
+
+## requirements
+- installed **Maven** on your computer
+- loaded **zip** source code archive
+
+## compilation process
+- open a command prompt in an unzipped folder **zip** archive (if not unzipped unzip)
+- write it down ``mvn install``
+- at the end of the assembly **jar** the file on the command line should write 
+*build succes* and create a folder *target*
+
+- in the folder **target** find **.jar** a file that will have an approximate name 
+*admin-commands-plugin-1.0-jar-with-dependencies.jar* - this is a plugin that you can use for your server
