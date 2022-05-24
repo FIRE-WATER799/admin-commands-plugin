@@ -1,7 +1,7 @@
 # Information
-Some time ago (no) I had no idea to create a new plugin, and I asked CergC
+Some time ago (no) I had no idea to create a new plugin, and I asked CergC (currently the founder of the Ukrainian game server)
 so that he could suggest an idea, he answered me so that I could create a plug-in for blocking and jamming!
-And you know what? I didn't know the database but I got together and wrote it all (who am I contacting ..)
+And you know what? I didn't know the database but I got together and wrote it all (who am I contacting..)
 ## Specifics
 - The plugin works on a database **sqlite3**
 - Even when the plugin is turned off conditionally time will go
@@ -15,9 +15,9 @@ the value of an element. For example there is a time ``2022 5 22 21 40`` of cour
 - ``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - blocked the player at the 
 specified time
 
-- ``admtimeunban <playername/UUID>`` - unlocks the player
-- ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - drowns the player at a given time
-- ``admunmute <playername/UUID>`` - deafens the player
+- ``admtimeunban <playername/UUID>`` - unblocks the player
+- ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - mute the player at a given time
+- ``admunmute <playername/UUID>`` - unmute the player
 - ``admcurrentdate`` - gives full dates from the time you wrote the command
 - ``admplayerstats <playername/UUID>`` - gives player statistics (blocking and muting time)
 
@@ -26,9 +26,9 @@ to all **clients** commands have access only to the admin
 - ``admtimeban <playername/UUID> <year> <month> <date> <hour> <minute>`` - blocks the player 
 at the specified time
 
-- ``admtimeunban <playername/UUID>`` - unlocks the player
-- ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - drowns the player at a given time
-- ``admunmute <playername/UUID>`` - deafens the player
+- ``admtimeunban <playername/UUID>`` - unblocks the player
+- ``admmute <playername/UUID> <year> <month> <date> <hour> <minute>`` - mute the player at a given time
+- ``admunmute <playername/UUID>`` - unmute the player
 - ``admcurrentdate`` - gives full dates from the time you wrote the command
 - ``admplayeruuid <playername>`` - gives **UUID** player 
 (exactly the identifier that is recorded in the database)
