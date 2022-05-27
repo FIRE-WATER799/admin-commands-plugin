@@ -4,21 +4,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import arc.util.Log;
 import mindustry.Vars;
 import mindustry.net.NetConnection;
-
+import salatosik.util.ConfigLoader;
 import salatosik.util.DatabasePlayersSystem;
 
 public class ServerAdminCommands {
 
-    private static SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static SimpleDateFormat formater = ConfigLoader.getTimeZoneFormatter();
 
     private static Calendar timeConsructor(String[] arguments) {
-        Calendar calendar = new GregorianCalendar();
+        Calendar calendar = ConfigLoader.getTimeZoneCalendar();
         List<Integer> dateList = new ArrayList<>();
 
         try {
@@ -62,7 +61,7 @@ public class ServerAdminCommands {
     }
 
     public static void currentDate(String[] args) {
-        Log.info(formater.format(Calendar.getInstance().getTime()));
+        Log.info(formater.format(ConfigLoader.getTimeZoneCalendar().getTime()));
     }
 
     public static void banPlayer(String[] args) {
@@ -161,6 +160,7 @@ public class ServerAdminCommands {
     public static void mutePlayer(String[] args) {
         Calendar calendar = timeConsructor(args);
         Long mutetime = calendar.getTime().getTime();
+
 
         if(calendar != null || mutetime != null) {
 

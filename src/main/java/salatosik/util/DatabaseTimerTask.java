@@ -2,7 +2,6 @@ package salatosik.util;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimerTask;
 
@@ -24,10 +23,10 @@ public class DatabaseTimerTask extends TimerTask {
 
                     if(DatabasePlayersSystem.getByPlayerId(id, "bantime") != 0) {
 
-                        Calendar banFromDatabase = new GregorianCalendar();
+                        Calendar banFromDatabase = ConfigLoader.getTimeZoneCalendar();
                         banFromDatabase.setTime(new Date(banTime));
 
-                        if(Calendar.getInstance().after(banFromDatabase)) {
+                        if(ConfigLoader.getTimeZoneCalendar().after(banFromDatabase)) {
                             DatabasePlayersSystem.replaceWherePlayerId(id, "bantime", 0);
                         }
                     }
@@ -36,10 +35,10 @@ public class DatabaseTimerTask extends TimerTask {
                         if(net.player.con().uuid.equals(id)) {
                             if(DatabasePlayersSystem.getByPlayerId(id, "mutetime") != 0) {
 
-                                Calendar muteFromDatabase = new GregorianCalendar();
+                                Calendar muteFromDatabase = ConfigLoader.getTimeZoneCalendar();
                                 muteFromDatabase.setTime(new Date(muteTime));
 
-                                if(Calendar.getInstance().after(muteFromDatabase)) {
+                                if(ConfigLoader.getTimeZoneCalendar().after(muteFromDatabase)) {
                                     net.player.sendMessage("[green]Час приглушення закінчився і ви знову можете писати.");
                                     DatabasePlayersSystem.replaceWherePlayerId(id, "mutetime", 0);
                                 }
