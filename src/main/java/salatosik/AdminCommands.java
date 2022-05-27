@@ -9,6 +9,7 @@ import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.gen.Player;
 import mindustry.mod.*;
+import salatosik.util.ConfigLoader;
 import salatosik.util.DatabasePlayersSystem;
 import salatosik.util.DatabaseTimerTask;
 import salatosik.commands.client.ClientAdminCommands;
@@ -42,6 +43,10 @@ public class AdminCommands extends Plugin {
                 e.printStackTrace();
             }
         }
+
+        // init config
+        try { ConfigLoader.init(AdminCommands.class.getClassLoader().getResourceAsStream("config/general.properies")); }
+        catch(Exception exception) { Log.info(exception.getMessage()); }
 
         // schedule task for change values in database
         databaseTimer.scheduleAtFixedRate(new DatabaseTimerTask(), 1000, 60000);

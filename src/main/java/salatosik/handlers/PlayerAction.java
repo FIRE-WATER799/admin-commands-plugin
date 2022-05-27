@@ -4,9 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import mindustry.game.EventType;
+import salatosik.util.ConfigLoader;
 import salatosik.util.DatabasePlayersSystem;
 
 public class PlayerAction {
+    private static SimpleDateFormat formater = ConfigLoader.getTimeZoneFormatter();
+
     public static void playerJoined(EventType.PlayerJoin event) {
         boolean playerInDatabase = DatabasePlayersSystem.searchId(event.player.con().uuid);
 
@@ -16,7 +19,6 @@ public class PlayerAction {
         } else if(playerInDatabase) {
 
             long banTime = DatabasePlayersSystem.getByPlayerId(event.player.con().uuid, "bantime");
-            SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             if(banTime != 0) {
                 event.player.con().kick("[red]You have been blocked on the server!\n[green]Until the end of the block: [yellow]" +
