@@ -28,6 +28,7 @@ public class ConfigLoader {
 
         if(!timeZoneFound) {
             Log.info("Time zone " + timeZoneFromConfig + " not found!\nSet the classic time zone..");
+            timeZone = "Etc/Universal";
 
         } else {
             timeZone = timeZoneFromConfig;
