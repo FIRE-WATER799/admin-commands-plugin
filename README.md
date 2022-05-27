@@ -6,9 +6,9 @@ And you know what? I didn't know the database but I got together and wrote it al
 - The plugin works on a database **sqlite3**
 - Even when the plugin is turned off conditionally time will go
 
-## Settings
+# Settings
 A recent update added a configuration file path: ```src/main/resources/config/general.properties``` which has only one parameter that specifies the time zone.
-# for what?
+### for what?
 In many cases, users take foreign hosting, thus making the time zone incompatible with yours, the reason for this is that in the ```Calendar``` class the date was determined automatically.
 
 ## Commands
