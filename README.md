@@ -6,6 +6,11 @@ And you know what? I didn't know the database but I got together and wrote it al
 - The plugin works on a database **sqlite3**
 - Even when the plugin is turned off conditionally time will go
 
+## Settings
+A recent update added a configuration file path: ```src/main/resources/config/general.properties``` which has only one parameter that specifies the time zone.
+# for what?
+In many cases, users take foreign hosting, thus making the time zone incompatible with yours, the reason for this is that in the ```Calendar``` class the date was determined automatically.
+
 ## Commands
 - Traditionally, to avoid conflicts between team names, I added the opening word ``adm``
 - You can also enter dates in the commands where you need to enter ``#`` so the plugin will take the present
