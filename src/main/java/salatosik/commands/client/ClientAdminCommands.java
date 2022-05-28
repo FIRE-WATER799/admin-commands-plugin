@@ -24,20 +24,22 @@ public class ClientAdminCommands {
 
             for(int i = 1; i < arguments.length; i++) {
                 if(arguments[i].equals("#")) {
-                    if(i == 1) {
-                        dateList.add(calendar.get(Calendar.YEAR));
+                    switch(i) {
 
-                    } else if(i == 2) {
-                        dateList.add(calendar.get(Calendar.MONTH));
+                        case 1: dateList.add(calendar.get(Calendar.YEAR));
+                        break;
 
-                    } else if(i == 3) {
-                        dateList.add(calendar.get(Calendar.DATE));
+                        case 2: dateList.add(calendar.get(Calendar.MONTH));
+                        break;
 
-                    } else if(i == 4) {
-                        dateList.add(calendar.get(Calendar.HOUR_OF_DAY));
+                        case 3: dateList.add(calendar.get(Calendar.DATE));
+                        break;
 
-                    } else if(i == 5) {
-                        dateList.add(calendar.get(Calendar.MINUTE));
+                        case 4: dateList.add(calendar.get(Calendar.HOUR_OF_DAY));
+                        break;
+
+                        case 5: dateList.add(calendar.get(Calendar.MINUTE));
+                        break;
                     }
 
                 } else {
