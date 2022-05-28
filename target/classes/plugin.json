@@ -1,7 +1,0 @@
-{
-  "name": "Admin commands plugin",
-  "author": "Salatosik",
-  "main": "salatosik.AdminCommands",
-  "description": "Plugin for the Mindustry game server that adds ban and mut commands and works all this on a database!",
-  "version": 1.0
-}
