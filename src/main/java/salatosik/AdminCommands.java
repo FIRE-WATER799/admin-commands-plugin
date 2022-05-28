@@ -45,7 +45,7 @@ public class AdminCommands extends Plugin {
         }
 
         // init config
-        try { ConfigLoader.init(AdminCommands.class.getClassLoader().getResourceAsStream("config/general.properies")); }
+        try { ConfigLoader.init(AdminCommands.class.getClassLoader().getResourceAsStream("config/general.properties")); }
         catch(Exception exception) { Log.info(exception.getMessage()); }
 
         // schedule task for change values in database
