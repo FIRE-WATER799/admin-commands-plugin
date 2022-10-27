@@ -91,10 +91,10 @@ public class ClientAdminCommands {
     private static String statsBuilder(String playerName, long banTime, long muteTime) {
         String text = "[green]Гравець: [yellow]" + playerName + "[]\n";
 
-        if(banTime == 0) text += "Час блокування: [yellow]не заблукований[]\n";
+        if(banTime == 0) text += "Час блокування: [yellow]не заблокований[]\n";
         else text += "Час блокування: [yellow]" + formater.format(new Date(banTime)) + "[]\n";
 
-        if(muteTime == 0) text += "Час глушки: [yellow]не заглушений";
+        if(muteTime == 0) text += "Час приглушення: [yellow]не приглушений";
         else text += "Час блокування чату: [yellow]" + formater.format(new Date(muteTime));
 
         return text;
@@ -193,7 +193,7 @@ public class ClientAdminCommands {
 
         } else if(DatabasePlayersSystem.searchId(args[0])) {
             if(DatabasePlayersSystem.getByPlayerId(args[0], "bantime") == 0) {
-                player.sendMessage("[yellow]Гравець на даний момент не заблукований");
+                player.sendMessage("[yellow]Гравець на даний момент не заблокований");
                 return;
             }
 
@@ -228,16 +228,16 @@ public class ClientAdminCommands {
 
         } else if(DatabasePlayersSystem.searchId(args[0])) {
             if(DatabasePlayersSystem.getByPlayerId(args[0], "mutetime") > 0) {
-                player.sendMessage("[green]Гравець вже заглушений.");
+                player.sendMessage("[green]Гравець вже приглушений.");
                 return;
             }
 
             DatabasePlayersSystem.replaceWherePlayerId(args[0], "mutetime", calendar.getTime().getTime());
-            player.sendMessage("[green]Гравець успішно заглушений!");
+            player.sendMessage("[green]Гравець успішно приглушений!");
 
             for(NetConnection net: Vars.net.getConnections()) {
                 if(net.player.con().uuid.equals(args[0])) {
-                    Call.infoMessage(net.player.con(), "[red]Тебе заглушив адмін [yellow]" + player.name() +
+                    Call.infoMessage(net.player.con(), "[red]Тебе приглушив адмін [yellow]" + player.name() +
                             "\nДо кінця наказу: " + formater.format(calendar.getTime()));
 
                     return;
@@ -251,14 +251,14 @@ public class ClientAdminCommands {
 
                     if(DatabasePlayersSystem.searchId(uuid)) {
                         if(DatabasePlayersSystem.getByPlayerId(uuid, "mutetime") > 0) {
-                            player.sendMessage("[green]Гравець вже заглушений.");
+                            player.sendMessage("[green]Гравець вже приглушений.");
                             return;
                         }
 
                         DatabasePlayersSystem.replaceWherePlayerId(uuid, "mutetime", calendar.getTime().getTime());
-                        player.sendMessage("[green]Гравець успішно заглушений!");
+                        player.sendMessage("[green]Гравець успішно приглушений!");
 
-                        Call.infoMessage(net.player.con(), "[red]Тебе заглушив адмін [yellow]" + player.name() +
+                        Call.infoMessage(net.player.con(), "[red]Тебе приглушив адмін [yellow]" + player.name() +
                             "\nДо кінця наказу: " + formater.format(calendar.getTime()));
                         
                         return;
@@ -277,7 +277,7 @@ public class ClientAdminCommands {
         } else if(DatabasePlayersSystem.searchId(args[0])) {
 
             if(DatabasePlayersSystem.getByPlayerId(args[0], "mutetime") == 0) {
-                player.sendMessage("[yellow]Гравець не має статусу заглушеного!");
+                player.sendMessage("[yellow]Гравець не має статусу приглушеного!");
                 return;
 
             } else {
@@ -303,7 +303,7 @@ public class ClientAdminCommands {
 
                     if(DatabasePlayersSystem.searchId(uuid)) {
                         if(DatabasePlayersSystem.getByPlayerId(uuid, "mutetime") == 0) {
-                            player.sendMessage("[yellow]Гравець не має статусу заглушеного!");
+                            player.sendMessage("[yellow]Гравець не має статусу приглушеного!");
                             return;
                         }
 
